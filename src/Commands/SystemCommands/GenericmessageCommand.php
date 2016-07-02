@@ -56,17 +56,18 @@ class GenericmessageCommand extends SystemCommand
         if (in_array($user_id, $this->telegram->getAdminList()) && strtolower(substr($command, 0, 5)) == 'whois') {
             return $this->telegram->executeCommand('whois', $this->update);
         }
+        require('lennys.php');
 
         $data = [
             'chat_id' => $chat_id,
-            'text'    => "This bot will filter trough a funny accent filter any message you send it.
+            'text'    => $lennys[0]."
 To use simply type
 
-@filtersbot Text
+@lennysbot Text
 
-in any chat and select the filter you want to use :)
-Written by Daniil Gentili (@danogentili, https://daniil.it). Check out my other bots: @video_dl_bot, @mklwp_bot, @caption_ai_bot, @cowsaysbot, @cowthinksbot, @figletsbot, @lolcatzbot, @filtersbot, @id3bot, @pwrtelegrambot!.
-http://github.com/danog/filtersbot",
+in any chat and select the lenny you want to use
+Written by Daniil Gentili (@danogentili, https://daniil.it). Check out my other bots: @video_dl_bot, @mklwp_bot, @caption_ai_bot, @cowsaysbot, @cowthinksbot, @figletsbot, @lolcatzbot, @filtersbot, @id3bot, @pwrtelegrambot, @audiokeychainbot!.
+https://github.com/danog/lennysbot",
         ];
 
         return Request::sendMessage($data);

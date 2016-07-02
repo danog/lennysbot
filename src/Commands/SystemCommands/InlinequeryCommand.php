@@ -32,6 +32,7 @@ class InlinequeryCommand extends SystemCommand
      */
     public function execute()
     {
+        require 'lennys.php';
         $update = $this->getUpdate();
         $inline_query = $update->getInlineQuery();
         $query = $inline_query->getQuery();
@@ -40,34 +41,20 @@ class InlinequeryCommand extends SystemCommand
 	$articles = [];
 	$id = 001;
 
-	$games = array("b1ff", "censor", "chef", "cockney", "eleet", "espdiff", "fudd", "jethro", "jibberish", "jive", "ken", "kenny", "kraut", "ky00te", "nethackify", "newspeak", "nyc", "pirate", "pony", "rasterman", "scottish", "scramble", "spammer", "studly",  "uniencode", "upside-down");
 // "fanboy"
-	if($query == "") {
-		        $articles[] = ['id' => "$id", 'title' => "Info message", 'message_text' => "Info about this bot.", 'input_message_content' => [ 'message_text' => 'This bot will filter trough a funny accent filter any message you send it.
-To use simply type
-
-@filtersbot Text
-
-in any chat and select the filter you want to use :)
-Written by Daniil Gentili (@danogentili, https://daniil.it). Check out my other bots: @video_dl_bot, @mklwp_bot, @caption_ai_bot, @cowsaysbot, @cowthinksbot, @figletsbot, @lolcatzbot, @filtersbot, @id3bot, @pwrtelegrambot!.
-http://github.com/danog/filtersbot', 'parse_mode' => 'Markdown' ] ];
-	} else {
-
-		foreach ($games as $filter) {
+		foreach ($lennys as $lenny) {
 
 		        $articles[] = [
 				'id' => "$id",
-				'title' => $filter,
-				'message_text' => $filter,
+				'title' => $query . " " . $lenny,
 				'input_message_content' => [
-					'message_text' => shell_exec("echo " . escapeshellarg($query) . " | /usr/games/" . $filter),
+					'message_text' => $query . " " . $lenny,
 				],
 			];
 
 			$id++;
 		}
 
-	}
         $array_article = [];
         foreach ($articles as $article) {
             $array_article[] = new InlineQueryResultArticle($article);
